@@ -1,46 +1,62 @@
 import customtkinter as ctk 
 import random
 ctk.set_appearance_mode('dark')
-def game(op):
+
+def pedra():
     machine = ['pedra', 'papel', 'tesoura']
     bot = random.choice(machine)
-    andamento.configure(text=f'O computador escolheu: {bot}')
-
+    op = 'pedra'
+    andamento.configure(text=f'Sua escolha: {op}\nO computador escolheu: {bot}')
     if op == bot:
         resultado.configure(text=f'Empate!', text_color='yellow')
-    if op == 'pedra':
-        if bot == 'tesoura':
-            resultado.configure(text=f'Você ganhou!', text_color='green')
-    elif op == 'papel':
-        if bot == 'pedra':
-            resultado.configure(text=f'Você ganhou!', text_color='green')
-    elif op == 'tesoura':
-        if bot == 'papel':
-            resultado.configure(text=f'Você ganhou!', text_color='green')
-    else:
+    elif bot == 'tesoura':
+        resultado.configure(text=f'Você ganhou!', text_color='green')
+    elif bot == 'papel':
         resultado.configure(text=f'Você perdeu!', text_color='red')
 
+def papel():
+    machine = ['pedra', 'papel', 'tesoura']
+    bot = random.choice(machine)
+    op = 'papel'
+    andamento.configure(text=f'Sua escolha: {op}\nO computador escolheu: {bot}')
+    if op == bot:
+        resultado.configure(text=f'Empate!', text_color='yellow')
+    elif bot == 'pedra':
+        resultado.configure(text=f'Você ganhou!', text_color='green')
+    elif bot == 'tesoura':
+        resultado.configure(text=f'Você perdeu!', text_color='red')
+
+def tesoura():
+    machine = ['pedra', 'papel', 'tesoura']
+    bot = random.choice(machine)
+    op = 'tesoura'
+    andamento.configure(text=f'Sua escolha: {op}\nO computador escolheu: {bot}')
+    if op == bot:
+        resultado.configure(text=f'Empate!', text_color='yellow')
+    elif bot == 'papel':
+        resultado.configure(text=f'Você ganhou!', text_color='green')
+    elif bot == 'pedra':
+        resultado.configure(text=f'Você perdeu!', text_color='red')
 
 app = ctk.CTk()
 app.title('Pedra, Papel e Tesoura')
 app.geometry('400x300')
-select = ctk.CTkRadioButton(app, text='Escolha sua jogada:', value='jknjnnj')
-select.pack(pady=10)
-up = ctk.CTkRadioButton(app, text='jknjnnj:', value='jknjnnj')
-up.pack(pady=10)
-pedra = ctk.CTkButton(app, text='Pedra', command=game)
+
+inicio = ctk.CTkLabel(app, text='Clique em um botão para escolher, e jogar. Boa sorte!')
+inicio.pack(pady=10)
+
+pedra = ctk.CTkButton(app, text='Pedra', command=pedra)
 pedra.pack(pady=5)
 
-papel = ctk.CTkButton(app, text='Papel', command=game)
+papel = ctk.CTkButton(app, text='Papel', command=papel)
 papel.pack(pady=5)
 
-tesoura = ctk.CTkButton(app, text='Tesoura', command=game)
+tesoura = ctk.CTkButton(app, text='Tesoura', command=tesoura)
 tesoura.pack(pady=5)
-andamento = ctk.CTkLabel(app, text='')
-andamento.pack(pady=20)
+andamento = ctk.CTkLabel(app, text='', justify='left')
+andamento.pack(pady=20, anchor='w')
 
 resultado = ctk.CTkLabel(app, text='')
 resultado.pack(pady=10)
-
 
 app.mainloop()
